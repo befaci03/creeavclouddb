@@ -8,14 +8,14 @@
   const hashesReq = await fetch("hashes.txt", { method: "GET" });
   if (!hashesReq.ok) document.body.innerHTML = "hash db couldnt be found :("
   const hashesRes = (await hashesReq.text()).split('\n');
-  const hashlist = hashesRes.filter(([_,v]) => !v.startsWith('#'));
+  const hashlist = hashesRes.filter(v => v.trim() !== "" && !v.startsWith("#"));
 
   const elem__hashUl = document.querySelector("ul#hashList")
   const hashCount = document.querySelector("span#hashCounter");
   hashCount.innerText = `${hashlist.length} hashes loaded`
   elem__hashes.appendChild(hashCount);
   
-  for (const hash in hashlist) {
+  for (const hash of hashlist) {
     const helem = document.createElement("li")
     helem.textContent = hash;
     elem__hashUl.appendChild(helem);
