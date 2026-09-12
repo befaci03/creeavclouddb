@@ -1,5 +1,31 @@
-this is not really the correct way to use this lol
+<!DOCTYPE html>
+<html>
+<head><title>creeav official database</title></head>
+<body>
+<script>document.addEventListener("DOMContentLoaded", async () => {
+  const elem__hashes = document.querySelector("div#hashes")
+  elem__hashes.innerHTML ='<span id="hashCounter">Loading...</span><ul id="hashList"></ul>'
+  const hashesReq = await fetch("hashes.txt", { method: "GET" });
+  if (!hashesReq.ok) document.body.innerHTML = "hash db couldnt be found :("
+  const hashesRes = (await hashesReq.text()).split('\n');
+  const hashlist = hashesRes.filter([_,v] => !v.startsWith('#'));
 
-the only thing that actually exists here is ./hashes.txt lol
+  const elem__hashUl = document.querySelector("ul#hashList")
+  const hashCount = document.querySelector("span#hashCounter");
+  hashCount.innerText = `${hashlist.length} hashes loaded`
+  elem__hashes.appendChild(hashCount);
+  
+  for (const hash in hashlist) {
+    const helem = document.createElement("li")
+    helem.textContent = hash;
+    elem__hashUl.appendChild(helem);
+  }
+})</script>
 
-read ./CONTRIBUTING.md for contribution guidelines
+<h2>This isn't meant to be readed by you...</h2>
+<p>Please see CONTRIBUTING.md and README.md</p><br>
+<p>list of all the hashes in the database</p>
+
+<div id="hashes">why are you seeing this? this isnt normal...</div>
+</body>
+</html>
