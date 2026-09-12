@@ -12,7 +12,7 @@
 
   const elem__hashUl = document.querySelector("ul#hashList")
   const hashCount = document.querySelector("span#hashCounter");
-  hashCount.innerText = hashlist.length
+  hashCount.innerText = `${hashlist.length} hashes loaded`
   elem__hashes.appendChild(hashCount);
   
   for (const hash in hashlist) {
